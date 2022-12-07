@@ -13,13 +13,17 @@
 {{#if loggedIn}}
 <form class="comment-form">
   <div>
-    <textarea name="comment-body"></textarea>
+    <textarea name="comment-body" id="comnent-text-area"></textarea>
   </div>
 
   <div>
-    <button type="submit">Add Comment</button>
+    <button type="submit" id="comment-submit-btn">Add Comment</button>
   </div>
 </form>
 {{/if}}
 
 {{> comments }}
+
+{{#if loggedIn}}
+<script src="/public//JS/comment.js"></script>
+{{/if}}

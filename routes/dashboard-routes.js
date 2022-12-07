@@ -1,10 +1,11 @@
 const router = require('express').Router();
 const {blog,user,comment}= require('../Models');
 const sequelize = require('../config/connection');
+const withAuth=  require('../utils/auth')
 
 
 
-router.get('/', async(req,res)=>{
+router.get('/', withAuth ,async(req,res)=>{
     try{
         const getBlogdash= await blog.findAll({where:{userName_id:req.session.userName_id},include:[{Model:comment},{Model:user,attributes:['userName']}]})
         if(!getBlogdash){
@@ -16,7 +17,7 @@ router.get('/', async(req,res)=>{
     }
 })
 
-router.get('/edit/:id', async(req,res)=>{ try{
+router.get('/edit/:id',withAuth, async(req,res)=>{ try{
     const editBlog= await blog.findByPk(req.params.id)
 
     if(!editBlog){

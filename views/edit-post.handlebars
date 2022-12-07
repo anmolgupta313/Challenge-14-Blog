@@ -6,10 +6,10 @@
 
     <form class ="edit-form">
         <div>
-            <input type="text" name="post-title" value="{{blog.title}}">
+            <input type="text" name="post-title" value="{{blog.title}}" id="blog-title-edit">
         </div>
         <div>
-           <textarea  cols="30" rows="10" type="text" name="post-text" >{{blog.content}}</textarea> 
+           <textarea  cols="30" rows="10" type="text" name="post-text" id="text-area-edit">{{blog.content}}</textarea> 
         </div>
         <div>
             <button type="submit" id="edit-poat-btn">Submit</button>
@@ -17,4 +17,8 @@
         </div>
     </form>
 </section>
+
+<script src="/public/JS/edit-post.js"></script>
+<script src="/public/JS/delete-post.js"></script>
+
 
