@@ -4,11 +4,11 @@ const sequelize = require('./config/connection');
 const path = require('path');
 
 // helper function
-const helpers = require('./utils/helpers');
+// const helpers = require('./utils/helpers');
 
 // handlebars
 const exphbs = require('express-handlebars');
-const hbs = exphbs.create({helpers});
+const hbs = exphbs.create();
 
 // session (connects session to sequelize Database)
 const session = require('express-session');

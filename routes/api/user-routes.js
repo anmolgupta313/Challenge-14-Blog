@@ -40,7 +40,7 @@ router.post('/login', async (req,res)=>{
         }})
 
         if(!loginUser){
-            res.status(404).json({message:{Please enter valid User}})
+            res.status(404).json({message:"Please enter valid User"})
             return;
         }
 

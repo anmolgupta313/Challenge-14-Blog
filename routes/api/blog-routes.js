@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { blog, user, comment } = require('../../models');
+const { Blog, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 const sequelize = require('../../config/connection');
 const { use } = require('./comment-routes');
@@ -7,7 +7,7 @@ const { json } = require('body-parser');
 
 router.get('/', async (req, res) => {
     try {
-        const getBlog = await blog.findAll({ include: [{ model: comment }, { model: user }] })
+        const getBlog = await Blog.findAll({ include: [{ model: Comment }, { model: User }] })
 
         res.status(200).json(getBlog)
     } catch (err) {
@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const getBlogById = await blog.findByPk(req.params.id)
+        const getBlogById = await Blog.findByPk(req.params.id)
 
         if (!getBlogById) {
             res.status(400).json({ message: "Please Enter Valid Id" })
@@ -29,7 +29,7 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     try {
-        const updateBlog = await blog.update(req.body, { where: { id: req.params.id } })
+        const updateBlog = await Blog.update(req.body, { where: { id: req.params.id } })
 
         if (!updateBlog) {
             req.stale(404).json({ message: "Please Enter Valid Id" })
@@ -43,7 +43,7 @@ router.put('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const postBlog = await blog.create({
+        const postBlog = await Blog.create({
             title: req.body.title,
             content: req.body.content
         })
@@ -56,7 +56,7 @@ router.post('/', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
-        const deleteBlog = await blog.destroy({
+        const deleteBlog = await Blog.destroy({
             where: {
                 id: req.params.id
             }

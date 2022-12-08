@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {blog,user,comment}= require('../Models');
+const {Blog,User,Comment}= require('../Models');
 const sequelize = require('../config/connection');
 const withAuth=  require('../utils/auth')
 
@@ -7,29 +7,31 @@ const withAuth=  require('../utils/auth')
 
 router.get('/', withAuth ,async(req,res)=>{
     try{
-        const getBlogdash= await blog.findAll({where:{userName_id:req.session.userName_id},include:[{Model:comment},{Model:user,attributes:['userName']}]})
+        const getBlogdash= await Blog.findAll({where:{userName_id:req.session.userName_id},include:[{Model:Comment},{Model:User,attributes:['userName']}]})
         if(!getBlogdash){
             res.status(404).json({message:'Invalid'});
-        }
-        res.render('dashboar',{blog,loggedIn:true});
+        } const posts = getBlogdash.map((post) => post.get({ plain: true }));
+        
+        res.render('dashboard',{posts,loggedIn:true});
     } catch(err){
         res.status(500).json(err);
     }
 })
 
 router.get('/edit/:id',withAuth, async(req,res)=>{ try{
-    const editBlog= await blog.findByPk(req.params.id)
+    const editBlog= await Blog.findByPk(req.params.id)
 
     if(!editBlog){
         res.status(404).json({message:'Enter A VALID iD'})
-    } res.render('edit-post',{blog,loggedIn:true});
+    }  const post = editBlog.get({ plain: true }); 
+    res.render('edit-post',{post,loggedIn:true});
 } catch(err){
     res.status(500).json(err)
 }
 
 });
 
-router.get('new-post', (req,res)=>{
+router.get('/newpost', (req,res)=>{
     res.render('new-post')
 });
 

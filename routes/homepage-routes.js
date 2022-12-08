@@ -1,13 +1,15 @@
 const router = require('express').Router();
-const {blog,user,comment}= require('../Models');
+const {Blog,User,Comment}= require('../Models');
 const sequelize = require('../config/connection');
 
 
 router.get('/',async (req,res)=>{
     try{
-        const getBlog= await blog.findAll({include:[{model:comment},{model:user,attributes:['userName']}]});
+        const getBlog= await Blog.findAll({include:[{model:Comment},{model:User,attributes:['userName']}]});
 
-        res.render('homepage',{blog, loggedIn:true});
+        const posts = getBlog.map((post) => post.get({ plain: true }));
+
+        res.render('homepage',{posts, loggedIn:true});
     }catch(err){
         res.status(500).json(err);
     }
@@ -19,14 +21,18 @@ router.get('/login', (req,res)=>{
     }res.render('login');
 })
 
-router.get('/blog/:id', async (req,res)=>{ try{
-    const findBlog= await blog.findByPk({where:{
-        id:req.params.id
-    },include:[{model:comment},{model:user,attributes:["userName"]}]})
+router.get('/signup', (req, res) => {
+    res.render('signup');
+});
+
+router.get('/Blog/:id', async (req,res)=>{ try{
+    const findBlog= await Blog.findByPk(req.params.id
+    ,{include:[{model:Comment},{model:User,attributes:["userName"]}]})
 
     if(!findBlog){
         res.status(404).json({message:'Please enter a valid Id'})
-    } res.render('single-post',{blog, loggedIn:true})
+    } const post = findBlog.get({ plain: true }); 
+    res.render('single-post',{post, loggedIn:true})
 } catch(err){
     res.status(500).json(err)
 }

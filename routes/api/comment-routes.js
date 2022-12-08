@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const { blog, user, comment } = require('../../models');
+const { Blog, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 const sequelize = require('../../config/connection');
 
 router.get('/', async (req, res) => {
     try {
-        const getComment = await comment.findAll({ include: [{ model: blog }, { model: user }] })
+        const getComment = await Comment.findAll({ include: [{ model: Blog }, { model: User }] })
         res.status(200).json(getComment)
     } catch (err) {
         res.status(500).json(err)
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const getCommnetId = await comment.findByPk(req.params.id)
+        const getCommnetId = await Comment.findByPk(req.params.id)
         if (!getCommnetId) {
             res.status(404).json({ message: "Please Enter Valid Id" })
         } res.status(200).json(getCommnetId)
@@ -25,7 +25,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const postComment = await comment.create({
+        const postComment = await Comment.create({
             commentContent: req.body.commentContent
         })
         res.status(200).json(postComment)
@@ -36,7 +36,7 @@ router.post('/', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
-        const deleteComment = await comment.destroy({
+        const deleteComment = await Comment.destroy({
             where: {
                 id: req.params.id
             }
