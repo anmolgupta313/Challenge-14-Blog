@@ -1,18 +1,21 @@
 async function signUp(event){
+    console.log('entering the sign up')
+    event.preventDefault();
     try{
-        event.preventDefault();
-        const userNameSignup= document.querySelector("#username-signup");
-        const paswordSignUp= document.querySelector("#password-signup");
+        
+        const userNameSignup= document.querySelector("#username-signup").value;
+        const paswordSignUp= document.querySelector("#password-signup").value;
 
-        const response= await fetch('/api/user',{
+        const response= await fetch('http://localhost:3001/api/user/',{
             method:'POST',
             body: JSON.stringify({
-                userNameSignup,
-                paswordSignUp
+                userName:userNameSignup,
+                password:paswordSignUp
             }),
             headers: { 'Content-Type': 'application/json' }
         });
-
+        console.log(response)
+alert(response)
         if(response.ok){
             document.location.replace('/dashboard');
         }else{
@@ -25,4 +28,4 @@ async function signUp(event){
 
 const signupBtn = document.querySelector("#signup-btn");
 
-signupBtn.addEventListener("submit", signUp);
+signupBtn.addEventListener("click", signUp);

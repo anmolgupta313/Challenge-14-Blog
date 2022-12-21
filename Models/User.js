@@ -16,7 +16,7 @@ User.init(
             autoIncrement: true,
             allowNull: false
         },
-        userName: {
+        user_name: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
