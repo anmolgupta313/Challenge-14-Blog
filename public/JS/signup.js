@@ -9,7 +9,7 @@ async function signUp(event){
         const response= await fetch('http://localhost:3001/api/user/',{
             method:'POST',
             body: JSON.stringify({
-                userName:userNameSignup,
+                user_name:userNameSignup,
                 password:paswordSignUp
             }),
             headers: { 'Content-Type': 'application/json' }
