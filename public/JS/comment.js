@@ -1,6 +1,7 @@
 async function addComment(event) {
+    event.preventDefalt();
     try {
-        event.preventDefalt();
+        
 
         const commnetTextArea = document.querySelector("#comnent-text-area").value;
         const post_id = window.location.toString().split('/')[

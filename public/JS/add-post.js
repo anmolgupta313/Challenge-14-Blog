@@ -1,16 +1,20 @@
 
 
-async function addPost(event){ try{
+async function addPost(event){ 
     event.preventDefault();
-    const titleInputValue= document.querySelector("#post-title").value;
-    const postContentValue= document.querySelector("#post-text-area").value;
+    try{
+   
+    const titleInputValue= document.querySelector('input[name="post-title"]').value;
+    const postContentValue= document.querySelector('textarea[name="post-text"]').value;
     
+    console.log(titleInputValue);
+    console.log(postContentValue);
 
     const response= await fetch('/api/blog',{
         method: "POST",
         body: JSON.stringify({
-            titleInputValue,
-            postContentValue
+            title: titleInputValue,
+            content: postContentValue
         }),
         headers:{
             "Content-type":"application/json",
@@ -19,6 +23,7 @@ async function addPost(event){ try{
 
     if(response.ok){
         document.location.replace("/dashboard");
+        console.log(response);
     }else{
         alert(response.statusText);
     }

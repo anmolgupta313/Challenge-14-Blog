@@ -6,7 +6,7 @@ async function signUp(event){
         const userNameSignup= document.querySelector("#username-signup").value;
         const paswordSignUp= document.querySelector("#password-signup").value;
 
-        const response= await fetch('http://localhost:3001/api/user/',{
+        const response= await fetch('/api/user/',{
             method:'POST',
             body: JSON.stringify({
                 user_name:userNameSignup,
@@ -15,7 +15,7 @@ async function signUp(event){
             headers: { 'Content-Type': 'application/json' }
         });
         console.log(response)
-alert(response)
+
         if(response.ok){
             document.location.replace('/dashboard');
         }else{
@@ -26,6 +26,6 @@ alert(response)
     }
 }
 
-const signupBtn = document.querySelector("#signup-btn");
+const signupBtn = document.querySelector(".signup-form");
 
-signupBtn.addEventListener("click", signUp);
+signupBtn.addEventListener("submit", signUp);

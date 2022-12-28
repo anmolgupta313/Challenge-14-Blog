@@ -14,7 +14,17 @@ router.post('/',async(req,res)=>{
             req.session.logged_in= true;
 
             res.status(200).json(postUser);
-        })
+        });
+    }catch(err){
+        res.status(500).json(err)
+    }
+})
+
+router.get('/', async(req,res)=>{
+    try{
+        const getUser= await User.findAll();
+
+        res.status(200).json(getUser);
     }catch(err){
         res.status(500).json(err)
     }
@@ -44,7 +54,7 @@ router.post('/login', async(req,res)=>{
             req.session.user_name= loginUser.user_name;
             req.session.logged_in= true;
 
-            res.status(200).json(loginUser);
+            res.json({ user: loginUser, message: 'You are now logged in!' });
         })
     }catch(err){
         res.status(500).json(err)

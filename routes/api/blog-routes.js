@@ -3,15 +3,15 @@ const { Blog, User, Comment } = require('../../models');
 const sequelize = require('../../config/connection');
 
 
-// router.get('/', async (req, res) => {
-//     try {
-//         const getBlog = await Blog.findAll({ include: [{ model: Comment }, { model: User }] })
+router.get('/', async (req, res) => {
+    try {
+        const getBlog = await Blog.findAll({ include: [{ model: Comment }, { model: User }] })
 
-//         res.status(200).json(getBlog)
-//     } catch (err) {
-//         res.status(500).json(err)
-//     }
-// });
+        res.status(200).json(getBlog)
+    } catch (err) {
+        res.status(500).json(err)
+    }
+});
 
 // router.get('/:id', async (req, res) => {
 //     try {

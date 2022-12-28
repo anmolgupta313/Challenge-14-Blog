@@ -1,6 +1,8 @@
 
-async function login(event){ try{
-    event.prevenrDefault();
+async function login(event){ 
+    event.preventDefault();
+    try{
+   
     const userName= document.querySelector("#user-name").value;
     const password= document.querySelector("#password-login").value;
 
@@ -24,6 +26,6 @@ async function login(event){ try{
    
 }
 
-const loginBtn= document.querySelector("#btn-submit");
+const loginBtn= document.querySelector(".login-form");
 
 loginBtn.addEventListener("submit",login);
