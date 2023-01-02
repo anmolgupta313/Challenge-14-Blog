@@ -22,7 +22,7 @@ async function addPost(event){
     });
 
     if(response.ok){
-        document.location.replace("/dashboard");
+        document.location.replace("/");
         console.log(response);
     }else{
         alert(response.statusText);
@@ -33,6 +33,6 @@ async function addPost(event){
 
 }
 
-const postSubmitBtn= document.querySelector("#post-add-btn");
+const postSubmitBtn= document.querySelector(".new-post-form");
 
-postSubmitBtn.addEventListener('click', addPost);
+postSubmitBtn.addEventListener('submit', addPost);

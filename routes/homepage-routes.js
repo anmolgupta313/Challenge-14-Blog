@@ -4,7 +4,7 @@ const sequelize = require('../config/connection');
 const withAuth=  require('../utils/auth')
 
 
-router.get('/', async (req,res)=>{
+router.get('/', withAuth, async (req,res)=>{
     try{
         const getBlog= await Blog.findAll({include:[{model:Comment},{model:User,attributes:['user_name']}]});
 

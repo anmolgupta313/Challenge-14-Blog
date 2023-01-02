@@ -61,13 +61,20 @@ router.post('/login', async(req,res)=>{
     }
 })
 
-router.post('/logout', async(req,res)=>{
-    if(req.session.logged_in){
-        req.session.destroy(()=>{
-            res.status(204).end
-        })
-    }
-})
+// router.post('/logout', async(req,res)=>{
+//     if(req.session.logged_in){
+//         req.session.destroy(()=>{
+//             res.status(204).end
+//         })
+//     }
+// })
+
+router.post('/logout', (req, res) => {
+
+    req.session.destroy(() => {
+        res.status(204).end();
+    });
+});
 
 router.delete('/delete/:id', async(req,res)=>{ try{
     const delUser= await User.destroy({where:{

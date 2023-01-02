@@ -1,12 +1,13 @@
-async function logout(){
+async function logout(event){
+    event.preventDefault();
     try{
-        const response= await fetch('http://localhost:3001/api/user/logout', {
+        const response= await fetch('/api/user/logout', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' }
         });
 
         if(response.ok){
-            document.location.replace('/');
+            document.location.replace('/login');
         }else{
             alert(response.statusText);
         }
