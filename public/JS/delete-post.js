@@ -20,7 +20,7 @@ async function deletePost(event){
     }
 }
 
-const delBtnPost= document.querySelector("#del-poat-btn");
+const delBtnPost= document.querySelector("#del-post-btn");
 
 delBtnPost.addEventListener('click',delBtnPost);
 

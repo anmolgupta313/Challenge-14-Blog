@@ -1,5 +1,6 @@
 body{
     font-family: poppins;
+    margin: 0px;
 }
 nav#nav {
     display: flex;
@@ -124,4 +125,45 @@ textarea#post-text-area {
 
 input#post-title {
     width: 100%;
+}
+
+.edit-form{
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        padding: 20px;
+}
+
+input#blog-title-edit {
+    width: 100%;
+}
+
+textarea#text-area-edit {
+    width: 100%;
+}
+
+button#edit-post-btn {
+    margin-bottom: 10px;
+}
+
+@media (max-width:414px) {
+    nav#nav{
+        justify-content: center;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-bottom: 20px;
+    }
+    div#ul{
+       
+        justify-content: center;
+    }
+
+    #btn-logout{
+        margin-left: 36px;
+    }
+
+    .post-section{
+        margin: 45px 10% 0px 9%;
+        padding: 20px;
+    }
 }

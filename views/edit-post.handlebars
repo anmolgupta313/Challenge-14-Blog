@@ -1,21 +1,25 @@
 <section>
-    <a href="">Go Back To Dashboard</a>
+    <a href="/dashboard">Go Back To Dashboard</a>
+    <div class="post-section">
     <div>
         <h2>Edit Post</h2>
     </div>
 
     <form class ="edit-form">
         <div>
+            <label for="post-title">Title</label>
             <input type="text" name="post-title" value="{{blog.title}}" id="blog-title-edit">
         </div>
         <div>
-           <textarea  cols="30" rows="10" type="text" name="post-text" id="text-area-edit">{{blog.content}}</textarea> 
+            <label for="post-text">Content</label>
+           <textarea type="text" name="post-text" id="text-area-edit">{{blog.content}}</textarea> 
         </div>
         <div>
-            <button type="submit" id="edit-poat-btn">Submit</button>
-            <button type="submit" id="del-poat-btn">Delete Post</button>
+            <button type="submit" id="edit-post-btn" class="btn">Submit</button>
+            <button type="submit" id="del-post-btn" class="btn">Delete Post</button>
         </div>
     </form>
+    </div>
 </section>
 
 <script src="/JS/edit-post.js"></script>

@@ -4,12 +4,15 @@ async function editPost(event){
 
         const titleEditBlog= document.querySelector("#blog-title-edit").value;
         const textAreaEdit= document.querySelector("#text-area-edit").value;
+        const id = window.location.toString().split('/')[
+            window.location.toString().split('/').length - 1
+          ];
 
         const response= await fetch(`/api/blog/${id}`,{
             method:'PUT',
             body: JSON.stringify({
-                titleEditBlog,
-                textAreaEdit
+                title: titleEditBlog,
+                content: textAreaEdit
             }),
             headers:{'Content-type':'application/json'}
         });
@@ -24,6 +27,6 @@ async function editPost(event){
     }
 }
 
-const submitBtnEdit= document.querySelector("#edit-poat-btn");
+const submitBtnEdit= document.querySelector(".edit-form");
 
-submitBtnEdit.addEventListener("click", editPost);
+submitBtnEdit.addEventListener("submit", editPost);
